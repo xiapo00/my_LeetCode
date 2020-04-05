@@ -26,6 +26,7 @@ class ListNode:
         self.val = x
         self.next = None
 
+
 class Solution_0002:
     def addTwoNumbers_1(self, l1, l2):
         n1 = 0
@@ -41,28 +42,55 @@ class Solution_0002:
             i *= 10
             l2 = l2.next
         n3 = n1 + n2
-        a = ListNode(n3 % 10)
-        c = a
+        a = ListNode(n3 % 10)  # create new linked list
+        c = a  # get the head of the list
         n3 //= 10
         while n3:
-            b = ListNode(n3 % 10)
+            b = ListNode(n3 % 10)  # create new node
             n3 //= 10
-            a.next = b
-            a = b
+            a.next = b  # put the new node into the linked list
+            a = b  # change the operating pointer
         return c
     
+    def addTwoNumbers_2(self, l1, l2):
+        up = False
+        head_node = ListNode(0)
+        n_node = head_node
+        while l1 or l2:
+            n1 = l1.val if l1 else 0
+            n2 = l2.val if l2 else 0
+            n_node.val = n1 + n2 + up - 10 if n1 + n2 + up >= 10 else n1 + n2 + up
+            up = (n1 + n2 + up >= 10)
+            n_node.next = ListNode(1) if up or (l1 and l1.next) or (l2 and l2.next) else None
+            n_node = n_node.next
+            l1 = l1.next if l1 and l1.next else 0
+            l2 = l2.next if l2 and l2.next else 0
+        return head_node
+    
     def test(self):
-        a1 = ListNode(2)
-        a2 = ListNode(4)
-        a3 = ListNode(3)
-        a1.next = a2
-        a2.next = a3
-        b1 = ListNode(5)
-        b2 = ListNode(6)
-        b3 = ListNode(4)
-        b1.next = b2
-        b2.next = b3
-        # assert self.addTwoNumbers_1(a1, b1) == c1
+        def int2ListNode(n):
+            a = ListNode(n % 10)
+            c = a
+            n //= 10
+            while n:
+                b = ListNode(n % 10)
+                n //= 10
+                a.next = b
+                a = b
+            return c
+
+        def ListNode2int(l):
+            n = 0
+            i = 1
+            while l:
+                n += l.val * i
+                i *= 10
+                l = l.next
+            return n
+        
+        n1, n2 = 932, 149
+        assert ListNode2int(self.addTwoNumbers_1(int2ListNode(n1), int2ListNode(n2))) == n1 + n2
+        assert ListNode2int(self.addTwoNumbers_2(int2ListNode(n1), int2ListNode(n2))) == n1 + n2
 
 
 if __name__ == '__main__':
