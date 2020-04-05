@@ -43,10 +43,10 @@ class Solution_0002:
         n3 = n1 + n2
         a = ListNode(n3 % 10)
         c = a
-        n3 = int(n3 / 10)
+        n3 //= 10
         while n3:
             b = ListNode(n3 % 10)
-            n3 = int(n3 / 10)
+            n3 //= 10
             a.next = b
             a = b
         return c
