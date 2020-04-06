@@ -106,10 +106,38 @@ class Solution_0003:
         return j - i
     
     def test(self):
-        assert self.lengthOfLongestSubstring_1('abcbabcba') == 3
+        assert self.lengthOfLongestSubstring_1("ggububgvfk") == 6
 
+
+class Solution_0004:
+    def findMedianSortedArrays_1(self, nums1: list, nums2: list) -> float:
+        if not nums1:
+            return (nums2[len(nums2) // 2] + nums2[len(nums2) // 2 - 1 + (len(nums2) % 2)]) / 2
+        if not nums2:
+            return (nums1[len(nums1) // 2] + nums1[len(nums1) // 2 - 1 + (len(nums1) % 2)]) / 2
+        i, j = 0, 0
+        L = []
+        while i + j < len(nums1) + len(nums2):
+            if i < len(nums1) and (j >= len(nums2) or nums1[i] < nums2[j]):
+                L.append(nums1[i])
+                i += 1
+            else:
+                L.append(nums2[j])
+                j += 1
+        return (L[len(L) // 2] + L[len(L) // 2 - 1 + (len(L) % 2)]) / 2
+    
+    def findMedianSortedArrays_2(self, nums1: list, nums2: list) -> float:
+        L = sorted(nums1 + nums2)
+        return (L[len(L) // 2] + L[len(L) // 2 - 1 + (len(L) % 2)]) / 2
+        # half = len(L) // 2
+        # return (L[half] + L[~half]) / 2
+    
+    def test(self):
+        assert self.findMedianSortedArrays_1([1, 2, 5], [3, 4 ,6]) == 3.5
+        assert self.findMedianSortedArrays_2([1, 2, 5], [3, 4 ,6]) == 3.5
 
 if __name__ == '__main__':
     Solution_0001().test()
     Solution_0002().test()
     Solution_0003().test()
+    Solution_0004().test()
