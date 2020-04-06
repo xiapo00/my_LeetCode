@@ -1,11 +1,11 @@
 class Solution_0001:
-    def twoSum_1(self, nums, target):
+    def twoSum_1(self, nums: list, target: int) -> list:
         for (index_1, item_1) in enumerate(nums):
             for (index_2, item_2) in enumerate(nums[index_1 + 1:]):
                 if item_1 + item_2 == target:
                     return [index_1, index_2 + index_1 + 1]
 
-    def twoSum_2(self, nums, target):
+    def twoSum_2(self, nums: list, target: int):
         d = {}
         for index, item in enumerate(nums):
             if item in d.keys():
@@ -28,7 +28,7 @@ class ListNode:
 
 
 class Solution_0002:
-    def addTwoNumbers_1(self, l1, l2):
+    def addTwoNumbers_1(self, l1: ListNode, l2: ListNode) -> ListNode:
         n1 = 0
         i = 1
         while l1:
@@ -52,7 +52,7 @@ class Solution_0002:
             a = b  # change the operating pointer
         return c
     
-    def addTwoNumbers_2(self, l1, l2):
+    def addTwoNumbers_2(self, l1: ListNode, l2: ListNode) -> ListNode:
         up = False
         head_node = ListNode(0)
         n_node = head_node
@@ -93,6 +93,23 @@ class Solution_0002:
         assert ListNode2int(self.addTwoNumbers_2(int2ListNode(n1), int2ListNode(n2))) == n1 + n2
 
 
+class Solution_0003:
+    def lengthOfLongestSubstring_1(self, s: str) -> int:
+        i = 0
+        j = (s != '')
+        while j < len(s):
+            if s[j] not in s[i: j] and len(set(s[i: j])) == j - i:
+                j += 1
+            else:
+                i += 1
+                j += 1
+        return j - i
+    
+    def test(self):
+        assert self.lengthOfLongestSubstring_1('abcbabcba') == 3
+
+
 if __name__ == '__main__':
     Solution_0001().test()
     Solution_0002().test()
+    Solution_0003().test()
