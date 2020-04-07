@@ -132,8 +132,6 @@ class Solution_0004:
     def findMedianSortedArrays_2(self, nums1: list, nums2: list) -> float:
         L = sorted(nums1 + nums2)
         return (L[len(L) // 2] + L[len(L) // 2 - 1 + (len(L) % 2)]) / 2
-        # half = len(L) // 2
-        # return (L[half] + L[~half]) / 2
 
     def test(self):
         assert self.findMedianSortedArrays_1([1, 2, 5], [3, 4, 6]) == 3.5
@@ -141,7 +139,7 @@ class Solution_0004:
 
 
 class Solution_0005:
-    def longestPalindrome(self, s: str) -> str:
+    def longestPalindrome_1(self, s: str) -> str:
         if s == s[-1::-1]:
             return s
         else:
@@ -151,10 +149,64 @@ class Solution_0005:
                     if s[i: j] == s[i: j][-1::-1]:
                         L.append(s[i: j])
             return L[list(map(len, L)).index(max([item for item in map(len, L)]))]
+    
+    def longestPalindrome_2(self, s: str) -> str:
+        if s == s[-1::-1]: # This can filter out strings with 0 or 1 element or 2 repeated elements
+            return s
+        else:
+            # find wanted son-strings with odd-numbered elements
+            centre = 0
+            radius = 0
+            L = [s[0], '']
+            while True:
+                if s[centre + radius] == s[centre - radius]:
+                    radius += 1
+                else:
+                    L[-1] = s[centre - radius + 1: centre + radius]
+                    L.append('')
+                    centre += 1
+                    radius = 0
+                if centre - radius < 0:
+                    L[-1] = s[centre - radius + 1: centre + radius]
+                    L.append('')
+                    centre += 1
+                    radius = 0
+                if centre + radius >= len(s):
+                    L[-1] = s[centre - radius + 1: centre + radius]
+                    L.append('')
+                    break
+            # find wanted son-strings with even-numbered elements
+            centre = 0
+            radius = 0
+            while True:
+                if s[centre] == s[centre + 1]:
+                    if s[centre - radius] == s[centre + radius + 1]:
+                        radius += 1
+                    else:
+                        L[-1] = s[centre - radius + 1: centre + radius + 1]
+                        L.append('')
+                        centre += 1
+                        radius = 0
+                    if centre - radius < 0:
+                        L[-1] = s[centre - radius + 1: centre + radius + 1]
+                        L.append('')
+                        centre += 1
+                        radius = 0
+                    if centre + radius + 1 >= len(s):
+                        L[-1] = s[centre - radius + 1: centre + radius + 1]
+                        L.append('')
+                        break
+                elif centre < len(s) - 2:
+                    centre += 1
+                else:
+                    break
+            return L[list(map(len, L)).index(max([item for item in map(len, L)]))]
 
     def test(self):
-        assert self.longestPalindrome('babad') in ['bab', 'aba']
-        assert self.longestPalindrome('bb') == 'bb'
+        assert self.longestPalindrome_1('babad') in ['bab', 'aba']
+        assert self.longestPalindrome_1('bb') == 'bb'
+        assert self.longestPalindrome_2('ac') in ['a', 'c']
+        assert self.longestPalindrome_2('2000001') == '00000'
 
 
 if __name__ == '__main__':
