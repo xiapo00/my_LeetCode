@@ -51,7 +51,7 @@ class Solution_0002:
             a.next = b  # put the new node into the linked list
             a = b  # change the operating pointer
         return c
-    
+
     def addTwoNumbers_2(self, l1: ListNode, l2: ListNode) -> ListNode:
         up = False
         head_node = ListNode(0)
@@ -61,12 +61,13 @@ class Solution_0002:
             n2 = l2.val if l2 else 0
             n_node.val = n1 + n2 + up - 10 if n1 + n2 + up >= 10 else n1 + n2 + up
             up = (n1 + n2 + up >= 10)
-            n_node.next = ListNode(1) if up or (l1 and l1.next) or (l2 and l2.next) else None
+            n_node.next = ListNode(1) if up or (
+                l1 and l1.next) or (l2 and l2.next) else None
             n_node = n_node.next
             l1 = l1.next if l1 and l1.next else 0
             l2 = l2.next if l2 and l2.next else 0
         return head_node
-    
+
     def test(self):
         def int2ListNode(n):
             a = ListNode(n % 10)
@@ -87,10 +88,12 @@ class Solution_0002:
                 i *= 10
                 l = l.next
             return n
-        
+
         n1, n2 = 932, 149
-        assert ListNode2int(self.addTwoNumbers_1(int2ListNode(n1), int2ListNode(n2))) == n1 + n2
-        assert ListNode2int(self.addTwoNumbers_2(int2ListNode(n1), int2ListNode(n2))) == n1 + n2
+        assert ListNode2int(self.addTwoNumbers_1(
+            int2ListNode(n1), int2ListNode(n2))) == n1 + n2
+        assert ListNode2int(self.addTwoNumbers_2(
+            int2ListNode(n1), int2ListNode(n2))) == n1 + n2
 
 
 class Solution_0003:
@@ -104,7 +107,7 @@ class Solution_0003:
                 i += 1
                 j += 1
         return j - i
-    
+
     def test(self):
         assert self.lengthOfLongestSubstring_1("ggububgvfk") == 6
 
@@ -125,19 +128,38 @@ class Solution_0004:
                 L.append(nums2[j])
                 j += 1
         return (L[len(L) // 2] + L[len(L) // 2 - 1 + (len(L) % 2)]) / 2
-    
+
     def findMedianSortedArrays_2(self, nums1: list, nums2: list) -> float:
         L = sorted(nums1 + nums2)
         return (L[len(L) // 2] + L[len(L) // 2 - 1 + (len(L) % 2)]) / 2
         # half = len(L) // 2
         # return (L[half] + L[~half]) / 2
-    
+
     def test(self):
-        assert self.findMedianSortedArrays_1([1, 2, 5], [3, 4 ,6]) == 3.5
-        assert self.findMedianSortedArrays_2([1, 2, 5], [3, 4 ,6]) == 3.5
+        assert self.findMedianSortedArrays_1([1, 2, 5], [3, 4, 6]) == 3.5
+        assert self.findMedianSortedArrays_2([1, 2, 5], [3, 4, 6]) == 3.5
+
+
+class Solution_0005:
+    def longestPalindrome(self, s: str) -> str:
+        if s == s[-1::-1]:
+            return s
+        else:
+            L = []
+            for i in range(len(s)):
+                for j in range(i + 1, len(s) + 1):
+                    if s[i: j] == s[i: j][-1::-1]:
+                        L.append(s[i: j])
+            return L[list(map(len, L)).index(max([item for item in map(len, L)]))]
+
+    def test(self):
+        assert self.longestPalindrome('babad') in ['bab', 'aba']
+        assert self.longestPalindrome('bb') == 'bb'
+
 
 if __name__ == '__main__':
     Solution_0001().test()
     Solution_0002().test()
     Solution_0003().test()
     Solution_0004().test()
+    Solution_0005().test()
