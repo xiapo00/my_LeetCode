@@ -1,3 +1,6 @@
+import re
+
+
 class Solution_0001:
     def twoSum_1(self, nums: list, target: int) -> list:
         for (index_1, item_1) in enumerate(nums):
@@ -149,9 +152,9 @@ class Solution_0005:
                     if s[i: j] == s[i: j][-1::-1]:
                         L.append(s[i: j])
             return L[list(map(len, L)).index(max([item for item in map(len, L)]))]
-    
+
     def longestPalindrome_2(self, s: str) -> str:
-        if s == s[-1::-1]: # This can filter out strings with 0 or 1 element or 2 repeated elements
+        if s == s[-1::-1]:  # This can filter out strings with 0 or 1 element or 2 repeated elements
             return s
         else:
             # find wanted son-strings with odd-numbered elements
@@ -209,9 +212,57 @@ class Solution_0005:
         assert self.longestPalindrome_2('2000001') == '00000'
 
 
+class Solution_0007:
+    def reverse_1(self, x: int) -> int:
+        if x > 2147483647 or x < -2147483648:
+            return 0
+        sign = (x >= 0) * 2 - 1
+        x //= sign
+        y = 0
+        while x:
+            y = y * 10 + x % 10
+            x //= 10
+        if y > 2147483647 or y < -2147483648:
+            return 0
+        return y * sign
+
+    def reverse_2(self, x: int) -> int:
+        if x > 2147483647 or x < -2147483648:
+            return 0
+        sign = (x >= 0)
+        x = x if x >= 0 else -x
+        y = 0
+        while x:
+            y = y * 10 + x % 10
+            x //= 10
+        if y > 2147483647 or y < -2147483648:
+            return 0
+        return y if sign else -y
+    
+    def reverse_3(self, x: int) -> int:
+        if x > 2147483647 or x < -2147483648:
+            return 0
+        sign = (x >= 0)
+        x = x if x >= 0 else -x
+        y = int(str(x)[-1::-1])
+        if y > 2147483647 or y < -2147483648:
+            return 0
+        return y if sign else -y
+
+    def test(self):
+        test_set = {123: [321], -123: [-321], 120: [21], 1534236469: [0]}
+        func_set = [self.reverse_1, self.reverse_2, self.reverse_3]
+        for f in func_set:
+            for x in test_set:
+                if f(x) not in test_set[x]:
+                    print('Inputting ' + str(x) + ', the result should be in ' + str(test_set[x]) + ', but your function "' + re.findall(
+                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
+
+
 if __name__ == '__main__':
     Solution_0001().test()
     Solution_0002().test()
     Solution_0003().test()
     Solution_0004().test()
     Solution_0005().test()
+    Solution_0007().test()
