@@ -5,4 +5,4 @@
 
 有意交流者可以加我微信哇。[滑稽]
 
-<img src="qr.jpg" style="zoom: 25%;" />
+<img src="qr.jpg" hight="400" width="300" />
