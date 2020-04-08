@@ -6,3 +6,5 @@
 有意交流者可以加我微信哇。[滑稽]
 
 <img src="qr.jpg" hight="400" width="300" />
+
+[已完成的题目代码](Solutions.py)
