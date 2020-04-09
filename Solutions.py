@@ -17,10 +17,15 @@ class Solution_0001:
                 d[target - item] = index
 
     def test(self):
-        nums = [3, 2, 4]
-        target = 6
-        assert self.twoSum_1(nums, target) == [1, 2]
-        assert self.twoSum_2(nums, target) == [1, 2]
+        ques_set_1 = [[3, 2, 4], ]
+        ques_set_2 = [6, ]
+        answ_set = [[[1, 2], ], ]
+        func_set = [self.twoSum_1, self.twoSum_2]
+        for f in func_set:
+            for i, x in enumerate(ques_set_1):
+                if f(x, ques_set_2[i]) not in answ_set[i]:
+                    print('Inputting ' + str(x) + str(ques_set_2[i]) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
+                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x, ques_set_2[i])) + '.')
 
 
 # Definition for singly-linked list.
@@ -238,7 +243,7 @@ class Solution_0007:
         if y > 2147483647 or y < -2147483648:
             return 0
         return y if sign else -y
-    
+
     def reverse_3(self, x: int) -> int:
         if x > 2147483647 or x < -2147483648:
             return 0
