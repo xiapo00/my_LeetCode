@@ -24,7 +24,7 @@ class Solution_0001:
         for f in func_set:
             for i, x in enumerate(ques_set_1):
                 if f(x, ques_set_2[i]) not in answ_set[i]:
-                    print('Inputting ' + str(x) + str(ques_set_2[i]) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
+                    print('Inputting ' + str(x) + ',' + str(ques_set_2[i]) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
                         'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x, ques_set_2[i])) + '.')
 
 
@@ -97,11 +97,15 @@ class Solution_0002:
                 l = l.next
             return n
 
-        n1, n2 = 932, 149
-        assert ListNode2int(self.addTwoNumbers_1(
-            int2ListNode(n1), int2ListNode(n2))) == n1 + n2
-        assert ListNode2int(self.addTwoNumbers_2(
-            int2ListNode(n1), int2ListNode(n2))) == n1 + n2
+        ques_set_1 = [int2ListNode(932), ]
+        ques_set_2 = [int2ListNode(149), ]
+        answ_set = [[1081, ], ]
+        func_set = [self.addTwoNumbers_1, self.addTwoNumbers_2]
+        for f in func_set:
+            for i, x in enumerate(ques_set_1):
+                if ListNode2int(f(x, ques_set_2[i])) not in answ_set[i]:
+                    print('Inputting ' + str(ListNode2int(x)) + ',' + str(ListNode2int(ques_set_2[i])) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
+                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(ListNode2int(f(x, ques_set_2[i]))) + '.')
 
 
 class Solution_0003:
@@ -117,7 +121,14 @@ class Solution_0003:
         return j - i
 
     def test(self):
-        assert self.lengthOfLongestSubstring_1("ggububgvfk") == 6
+        ques_set = ['ggububgvfk', ]
+        answ_set = [[6, ], ]
+        func_set = [self.lengthOfLongestSubstring_1, ]
+        for f in func_set:
+            for i, x in enumerate(ques_set):
+                if f(x) not in answ_set[i]:
+                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
+                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
 
 
 class Solution_0004:
@@ -142,8 +153,15 @@ class Solution_0004:
         return (L[len(L) // 2] + L[len(L) // 2 - 1 + (len(L) % 2)]) / 2
 
     def test(self):
-        assert self.findMedianSortedArrays_1([1, 2, 5], [3, 4, 6]) == 3.5
-        assert self.findMedianSortedArrays_2([1, 2, 5], [3, 4, 6]) == 3.5
+        ques_set_1 = [[1, 2, 5], ]
+        ques_set_2 = [[3, 4, 6], ]
+        answ_set = [[3.5, ], ]
+        func_set = [self.findMedianSortedArrays_1, self.findMedianSortedArrays_2]
+        for f in func_set:
+            for i, x in enumerate(ques_set_1):
+                if f(x, ques_set_2[i]) not in answ_set[i]:
+                    print('Inputting ' + str(x) + ',' + str(ques_set_2[i]) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
+                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x, ques_set_2[i])) + '.')
 
 
 class Solution_0005:
@@ -211,10 +229,14 @@ class Solution_0005:
             return L[list(map(len, L)).index(max([item for item in map(len, L)]))]
 
     def test(self):
-        assert self.longestPalindrome_1('babad') in ['bab', 'aba']
-        assert self.longestPalindrome_1('bb') == 'bb'
-        assert self.longestPalindrome_2('ac') in ['a', 'c']
-        assert self.longestPalindrome_2('2000001') == '00000'
+        ques_set = ['babad', 'bb', 'ac', '2000001']
+        answ_set = [['bab', 'aba'], ['bb', ], ['a', 'c'], ['00000', ]]
+        func_set = [self.longestPalindrome_1, self.longestPalindrome_2]
+        for f in func_set:
+            for i, x in enumerate(ques_set):
+                if f(x) not in answ_set[i]:
+                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
+                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
 
 
 class Solution_0007:
