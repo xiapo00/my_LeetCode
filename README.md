@@ -2,7 +2,7 @@
 
 [我的LeetCode主页](https://leetcode-cn.com/u/darryl-xian/)
 
-[已完成的题目代码](Code_000x.md)
+[已完成的题目代码](Code_000x.ipynb)
 
 [解题过程全记录](Experiences.md)
 
