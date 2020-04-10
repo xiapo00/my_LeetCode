@@ -2,7 +2,7 @@
 
 [我的LeetCode主页](https://leetcode-cn.com/u/darryl-xian/)
 
-[已完成的题目代码](Solutions.py)
+[已完成的题目代码](Code_000x.md)
 
 业余入门级低手，断断续续地刷LeetCode的题，在此存放一些代码和想法。
 
