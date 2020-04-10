@@ -239,6 +239,11 @@ class Solution_0005:
                         'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
 
 
+class Solution_0006:
+    def test(self):
+        pass
+
+
 class Solution_0007:
     def reverse_1(self, x: int) -> int:
         if x > 2147483647 or x < -2147483648:
@@ -277,19 +282,16 @@ class Solution_0007:
         return y if sign else -y
 
     def test(self):
-        test_set = {123: [321], -123: [-321], 120: [21], 1534236469: [0]}
+        ques_set = [123, -123, 120, 1534236469]
+        answ_set = [[321, ], [-321, ], [21, ], [0, ]]
         func_set = [self.reverse_1, self.reverse_2, self.reverse_3]
         for f in func_set:
-            for x in test_set:
-                if f(x) not in test_set[x]:
-                    print('Inputting ' + str(x) + ', the result should be in ' + str(test_set[x]) + ', but your function "' + re.findall(
+            for i, x in enumerate(ques_set):
+                if f(x) not in answ_set[i]:
+                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
                         'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
 
 
 if __name__ == '__main__':
-    Solution_0001().test()
-    Solution_0002().test()
-    Solution_0003().test()
-    Solution_0004().test()
-    Solution_0005().test()
-    Solution_0007().test()
+    class_set = [eval('Solution_%04d' % x) for x in range(1, 8)]
+    [S().test() for S in class_set]
