@@ -1,3 +1,5 @@
+[下载](Solutions.py)
+```python
 import re
 
 
@@ -329,3 +331,4 @@ class Solution_0007:
 if __name__ == '__main__':
     class_set = [eval('Solution_%04d' % x) for x in range(1, 8)]
     [S().test() for S in class_set]
+```
