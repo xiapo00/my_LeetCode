@@ -327,5 +327,5 @@ class Solution_0007:
 
 
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % x) for x in range(1, 8)]
+    class_set = [eval('Solution_%04d' % (x + 1)) for x in range(7)]
     [S().test() for S in class_set]
