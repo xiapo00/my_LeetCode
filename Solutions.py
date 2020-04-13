@@ -366,10 +366,13 @@ class Solution_0009:
             xc //= 10
         return x == y
 
+    def isPalindrome_2(self, x: int) -> bool:
+        return str(x) == str(x)[-1::-1]
+
     def test(self):
         ques_set = [121, -121, 10]
         answ_set = [[True, ], [False, ], [False, ]]
-        func_set = [self.isPalindrome_1, ]
+        func_set = [self.isPalindrome_1, self.isPalindrome_2]
         for f in func_set:
             for i, x in enumerate(ques_set):
                 if f(x) not in answ_set[i]:
