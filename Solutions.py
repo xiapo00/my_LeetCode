@@ -355,6 +355,28 @@ class Solution_0008:
                         'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
 
 
+class Solution_0009:
+    def isPalindrome_1(self, x: int) -> bool:
+        if x < 0:
+            return False
+        y = 0
+        xc = x
+        while xc:
+            y = y * 10 + xc % 10
+            xc //= 10
+        return x == y
+
+    def test(self):
+        ques_set = [121, -121, 10]
+        answ_set = [[True, ], [False, ], [False, ]]
+        func_set = [self.isPalindrome_1, ]
+        for f in func_set:
+            for i, x in enumerate(ques_set):
+                if f(x) not in answ_set[i]:
+                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
+                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
+
+
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % (x + 1)) for x in range(8)]
+    class_set = [eval('Solution_%04d' % (x + 1)) for x in range(9)]
     [S().test() for S in class_set]
