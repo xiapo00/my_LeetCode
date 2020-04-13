@@ -326,6 +326,35 @@ class Solution_0007:
                         'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
 
 
+class Solution_0008:
+    def myAtoi_1(self, str: str) -> int:
+        if str.replace(' ', '') == '':
+            return 0
+        else:
+            i = 0
+            while str[i] == ' ':
+                i += 1
+            if str[i] in '+-1234567890':
+                temp = str[i]
+                i += 1
+                while i < len(str) and str[i] in '1234567890':
+                    temp += str[i]
+                    i += 1
+                return min(max(int(temp), -2147483648), 2147483647) if temp != '+' and temp != '-' else 0
+            else:
+                return 0
+    
+    def test(self):
+        ques_set = ['42', '   -42', '4193 with words', 'words and 987', '-91283472332', '+']
+        answ_set = [[42, ], [-42, ], [4193, ], [0, ], [-2147483648, ], [0, ]]
+        func_set = [self.myAtoi_1, ]
+        for f in func_set:
+            for i, x in enumerate(ques_set):
+                if f(x) not in answ_set[i]:
+                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
+                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
+
+
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % (x + 1)) for x in range(7)]
+    class_set = [eval('Solution_%04d' % (x + 1)) for x in range(8)]
     [S().test() for S in class_set]
