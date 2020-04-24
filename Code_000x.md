@@ -369,7 +369,7 @@ class Solution_0009:
         return x == y
 
     def isPalindrome_2(self, x: int) -> bool:
-        return str(x) == str(x)[-1::-1]
+        return str(x) == str(x)[::-1]
 
     def test(self):
         ques_set = [121, -121, 10]
@@ -381,7 +381,27 @@ class Solution_0009:
                     print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
                         'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
 
+
+class Solution_0010:
+    def isMatch_1(self, s: str, p: str) -> bool:
+        import re
+        if re.match('^%s$' % (p, ), s):
+            return True
+        return False
+    
+    def test(self):
+        ques_set_1 = ["aa", "aa", "ab", "aab", "mississippi"]
+        ques_set_2 = ["a", "a*", ".*", "c*a*b", "mis*is*p*."]
+        answ_set = [[False, ], [True, ], [True, ], [True, ], [False, ]]
+        func_set = [self.isMatch_1]
+        for f in func_set:
+            for i, x in enumerate(ques_set_1):
+                if f(x, ques_set_2[i]) not in answ_set[i]:
+                    print('Inputting ' + str(x) + ',' + str(ques_set_2[i]) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
+                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x, ques_set_2[i])) + '.')
+
+
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % (x + 1)) for x in range(9)]
+    class_set = [eval('Solution_%04d' % (x + 1)) for x in range(10)]
     [S().test() for S in class_set]
 ```
