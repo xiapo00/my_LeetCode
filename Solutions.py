@@ -1,5 +1,7 @@
 import re
 
+from tester import tester
+
 
 class Solution_0001:
     def twoSum_1(self, nums: list, target: int) -> list:
@@ -17,15 +19,11 @@ class Solution_0001:
                 d[target - item] = index
 
     def test(self):
-        ques_set_1 = [[3, 2, 4], ]
-        ques_set_2 = [6, ]
-        answ_set = [[[1, 2], ], ]
         func_set = [self.twoSum_1, self.twoSum_2]
+        test_set = [(([3, 2, 4], 6), [[1, 2], ]), ]
         for f in func_set:
-            for i, x in enumerate(ques_set_1):
-                if f(x, ques_set_2[i]) not in answ_set[i]:
-                    print('Inputting ' + str(x) + ',' + str(ques_set_2[i]) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x, ques_set_2[i])) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 # Definition for singly-linked list.
@@ -121,14 +119,11 @@ class Solution_0003:
         return j - i
 
     def test(self):
-        ques_set = ['ggububgvfk', ]
-        answ_set = [[6, ], ]
         func_set = [self.lengthOfLongestSubstring_1, ]
+        test_set = [(('ggububgvfk', ), [6, ]), ]
         for f in func_set:
-            for i, x in enumerate(ques_set):
-                if f(x) not in answ_set[i]:
-                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 class Solution_0004:
@@ -153,15 +148,11 @@ class Solution_0004:
         return (L[len(L) // 2] + L[len(L) // 2 - 1 + (len(L) % 2)]) / 2
 
     def test(self):
-        ques_set_1 = [[1, 2, 5], ]
-        ques_set_2 = [[3, 4, 6], ]
-        answ_set = [[3.5, ], ]
         func_set = [self.findMedianSortedArrays_1, self.findMedianSortedArrays_2]
+        test_set = [(([1, 2, 5], [3, 4, 6]), [3.5, ]), ]
         for f in func_set:
-            for i, x in enumerate(ques_set_1):
-                if f(x, ques_set_2[i]) not in answ_set[i]:
-                    print('Inputting ' + str(x) + ',' + str(ques_set_2[i]) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x, ques_set_2[i])) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 class Solution_0005:
@@ -177,7 +168,7 @@ class Solution_0005:
             return L[list(map(len, L)).index(max([item for item in map(len, L)]))]
 
     def longestPalindrome_2(self, s: str) -> str:
-        if s == s[-1::-1]:  # This can filter out strings with 0 or 1 element or 2 repeated elements
+        if s == s[::-1]:  # This can filter out strings with 0 or 1 element or 2 repeated elements
             return s
         else:
             # find wanted son-strings with odd-numbered elements
@@ -229,14 +220,14 @@ class Solution_0005:
             return L[list(map(len, L)).index(max([item for item in map(len, L)]))]
 
     def test(self):
-        ques_set = ['babad', 'bb', 'ac', '2000001']
-        answ_set = [['bab', 'aba'], ['bb', ], ['a', 'c'], ['00000', ]]
         func_set = [self.longestPalindrome_1, self.longestPalindrome_2]
+        test_set = [(('babad', ), ['bab', 'aba']),
+                    (('bb', ), ['bb', ]),
+                    (('ac', ), ['a', 'c', ]),
+                    (('2000001', ), ['00000', ])]
         for f in func_set:
-            for i, x in enumerate(ques_set):
-                if f(x) not in answ_set[i]:
-                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 class Solution_0006:
@@ -250,7 +241,7 @@ class Solution_0006:
                 if j % d == i or j % d == d - i:
                     result += ch
         return result
-    
+
     def convert_2(self, s: str, numRows: int) -> str:
         if numRows <= 1:
             return s
@@ -267,15 +258,14 @@ class Solution_0006:
         return result
 
     def test(self):
-        ques_set_1 = ["LEETCODEISHIRING", "LEETCODEISHIRING", "A", "AB"]
-        ques_set_2 = [3, 4, 1, 1]
-        answ_set = [["LCIRETOESIIGEDHN", ], ["LDREOEIIECIHNTSG", ], ["A", ], ["AB", ]]
         func_set = [self.convert_1, self.convert_2]
+        test_set = [(("LEETCODEISHIRING", 3), ["LCIRETOESIIGEDHN", ]),
+                    (("LEETCODEISHIRING", 4), ["LDREOEIIECIHNTSG", ]),
+                    (("A", 1), ["A", ]),
+                    (("AB", 1), ["AB", ])]
         for f in func_set:
-            for i, x in enumerate(ques_set_1):
-                if f(x, ques_set_2[i]) not in answ_set[i]:
-                    print('Inputting ' + str(x) + ',' + str(ques_set_2[i]) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x, ques_set_2[i])) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 class Solution_0007:
@@ -316,14 +306,14 @@ class Solution_0007:
         return y if sign else -y
 
     def test(self):
-        ques_set = [123, -123, 120, 1534236469]
-        answ_set = [[321, ], [-321, ], [21, ], [0, ]]
         func_set = [self.reverse_1, self.reverse_2, self.reverse_3]
+        test_set = [((123, ), [321, ]),
+                    ((-123, ), [-321, ]),
+                    ((120, ), [21, ]),
+                    ((1534236469, ), [0, ])]
         for f in func_set:
-            for i, x in enumerate(ques_set):
-                if f(x) not in answ_set[i]:
-                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 class Solution_0008:
@@ -343,16 +333,17 @@ class Solution_0008:
                 return min(max(int(temp), -2147483648), 2147483647) if temp != '+' and temp != '-' else 0
             else:
                 return 0
-    
+
     def test(self):
-        ques_set = ['42', '   -42', '4193 with words', 'words and 987', '-91283472332', '+']
-        answ_set = [[42, ], [-42, ], [4193, ], [0, ], [-2147483648, ], [0, ]]
         func_set = [self.myAtoi_1, ]
+        test_set = [(('42', ), [42, ]),
+                    (('   -42', ), [-42, ]),
+                    (('4193 with words', ), [4193, ]),
+                    (('-91283472332', ), [-2147483648, ]),
+                    (('+', ), [0, ])]
         for f in func_set:
-            for i, x in enumerate(ques_set):
-                if f(x) not in answ_set[i]:
-                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 class Solution_0009:
@@ -370,14 +361,13 @@ class Solution_0009:
         return str(x) == str(x)[::-1]
 
     def test(self):
-        ques_set = [121, -121, 10]
-        answ_set = [[True, ], [False, ], [False, ]]
         func_set = [self.isPalindrome_1, self.isPalindrome_2]
+        test_set = [((121, ), [True, ]),
+                    ((-121, ), [False, ]),
+                    ((10, ), [False, ])]
         for f in func_set:
-            for i, x in enumerate(ques_set):
-                if f(x) not in answ_set[i]:
-                    print('Inputting ' + str(x) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x)) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 class Solution_0010:
@@ -386,17 +376,17 @@ class Solution_0010:
         if re.match('^%s$' % (p, ), s):
             return True
         return False
-    
+
     def test(self):
-        ques_set_1 = ["aa", "aa", "ab", "aab", "mississippi"]
-        ques_set_2 = ["a", "a*", ".*", "c*a*b", "mis*is*p*."]
-        answ_set = [[False, ], [True, ], [True, ], [True, ], [False, ]]
-        func_set = [self.isMatch_1]
+        func_set = [self.isMatch_1, ]
+        test_set = [(("aa", "a"), [False, ]),
+                    (("aa", "a*"), [True, ]),
+                    (("ab", ".*"), [True, ]),
+                    (("aab", "c*a*b"), [True, ]),
+                    (("mississippi", "mis*is*p*."), [False, ])]
         for f in func_set:
-            for i, x in enumerate(ques_set_1):
-                if f(x, ques_set_2[i]) not in answ_set[i]:
-                    print('Inputting ' + str(x) + ',' + str(ques_set_2[i]) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(f(x, ques_set_2[i])) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 if __name__ == '__main__':
