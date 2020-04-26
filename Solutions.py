@@ -1,5 +1,3 @@
-import re
-
 from tester import tester
 
 
@@ -95,15 +93,11 @@ class Solution_0002:
                 l = l.next
             return n
 
-        ques_set_1 = [int2ListNode(932), ]
-        ques_set_2 = [int2ListNode(149), ]
-        answ_set = [[1081, ], ]
-        func_set = [self.addTwoNumbers_1, self.addTwoNumbers_2]
+        func_set = [lambda x, y: ListNode2int(self.addTwoNumbers_1(x, y)), lambda x, y: ListNode2int(self.addTwoNumbers_2(x, y))]
+        test_set = [((int2ListNode(932), int2ListNode(149)), [1081, ]), ]
         for f in func_set:
-            for i, x in enumerate(ques_set_1):
-                if ListNode2int(f(x, ques_set_2[i])) not in answ_set[i]:
-                    print('Inputting ' + str(ListNode2int(x)) + ',' + str(ListNode2int(ques_set_2[i])) + ', the result should be in ' + str(answ_set[i]) + ', but your function "' + re.findall(
-                        'bound method (.*?) of <', str(f))[0] + '" returned ' + str(ListNode2int(f(x, ques_set_2[i]))) + '.')
+            for data in test_set:
+                tester(f, *data).test()
 
 
 class Solution_0003:

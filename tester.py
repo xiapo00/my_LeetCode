@@ -6,7 +6,10 @@ class tester:
         self.f = func
         self.x = ques
         self.y = answ
-        self.name = re.findall('bound method (.*?) of <', str(func))[0]
+        try:
+            self.name = re.findall('bound method (.*?) of <', str(func))[0]
+        except IndexError:
+            self.name = str(func)
 
     def test(self):
         if self.f(*self.x) not in self.y:
