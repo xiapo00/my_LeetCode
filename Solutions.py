@@ -367,12 +367,29 @@ class Solution_0009:
 class Solution_0010:
     def isMatch_1(self, s: str, p: str) -> bool:
         import re
-        if re.match('^%s$' % (p, ), s):
-            return True
-        return False
+        return bool(re.match('^%s$' % (p, ), s))
+
+    def isMatch_2(self, s: str, p: str) -> bool:
+        i_max, j_max = len(s) - 1, len(p) - 1
+        i, j = 0, 0
+        while i <= i_max and j <= j_max:
+            if s[i] == p[j] or p[j] == '.':
+                i, j = i + 1, j + 1
+            elif p[j] == '*':
+                if i < i_max:
+                    while s[i + 1] != p[j + 1] and i < i_max:
+                        i += 1
+                else:
+                    if s[i] != p[j - 1]:
+                        return False
+            else:
+                return False
+        if i != i_max or j != j_max:
+            return False
+        return True
 
     def test(self):
-        func_set = [self.isMatch_1, ]
+        func_set = [self.isMatch_1, self.isMatch_2]
         test_set = [(("aa", "a"), [False, ]),
                     (("aa", "a*"), [True, ]),
                     (("ab", ".*"), [True, ]),
