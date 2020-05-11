@@ -376,15 +376,17 @@ class Solution_0010:
             if s[i] == p[j] or p[j] == '.':
                 i, j = i + 1, j + 1
             elif p[j] == '*':
-                if i < i_max:
-                    while s[i + 1] != p[j + 1] and i < i_max:
-                        i += 1
+                if s[i] == p[j - 1] or p[j - 1] == '.':
+                    i += 1
+                elif s[i] == p[j + 1] or p[j + 1] == '.':
+                    j += 1
                 else:
-                    if s[i] != p[j - 1]:
-                        return False
+                    return False
+            elif p[j + 1] == '*':
+                j += 2
             else:
                 return False
-        if i != i_max or j != j_max:
+        if j > j_max and j - j_max != i - i_max:
             return False
         return True
 
@@ -394,7 +396,10 @@ class Solution_0010:
                     (("aa", "a*"), [True, ]),
                     (("ab", ".*"), [True, ]),
                     (("aab", "c*a*b"), [True, ]),
-                    (("mississippi", "mis*is*p*."), [False, ])]
+                    (("mississippi", "mis*is*p*."), [False, ]),
+                    (("mississippi", "mis*is*ip*."), [True, ]),
+                    (("ab", ".*c"), [False, ]),
+                    (("ab", ".*c*"), [True, ])]
         for f in func_set:
             for data in test_set:
                 tester(f, *data).test()
