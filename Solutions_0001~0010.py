@@ -369,7 +369,7 @@ class Solution_0010:
         import re
         return bool(re.match('^%s$' % (p, ), s))
 
-    def isMatch_2(self, s: str, p: str) -> bool:
+    def isMatch_2(self, s: str, p: str) -> bool: # Unfinished
         i_max, j_max = len(s) - 1, len(p) - 1
         i, j = 0, 0
         while i <= i_max and j <= j_max:

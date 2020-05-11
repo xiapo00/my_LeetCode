@@ -2,7 +2,7 @@
 
 [我的LeetCode主页](https://leetcode-cn.com/u/darryl-xian/)
 
-[已完成的题目代码](https://github.com/xiapo00/my_LeetCode/blob/master/Solutions.py)
+[已完成的题目代码](Solutions.md)
 
 [解题过程全记录](Experiences.md)
 
