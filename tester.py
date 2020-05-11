@@ -12,5 +12,6 @@ class tester:
             self.name = str(func)
 
     def test(self):
-        if self.f(*self.x) not in self.y:
-            print(f'Inputting {self.x}, the result should be in {self.y}, but your function {self.name} returned {self.f(*self.x)}.')
+        result = self.f(*self.x)
+        if result not in self.y:
+            print(f'Inputting {self.x}, the result should be in {self.y}, but your function {self.name} returned {result}.')
