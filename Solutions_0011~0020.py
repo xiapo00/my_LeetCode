@@ -182,8 +182,61 @@ class Solution_0014:
         func_set = [self.longestCommonPrefix_1, ]
         test_set = [((["flower","flow","flight"], ), ["fl", ]),
                     ((["dog","racecar","car"], ), ["", ])]
+        for f in func_set:
+            for data in test_set:
+                tester(f, *data).test()
+
+
+class Solution_0015:
+    def threeSum_1(self, nums: list) -> list:
+        def twoSum(nums: list, target: int) -> list:
+            d = {}
+            result = []
+            for index, item in enumerate(nums):
+                if item in d.keys():
+                    result.append([item, target - item, -target])
+                else:
+                    d[target - item] = index
+            return result
+        
+        if set(nums) == {0} and len(nums) > 2:
+            return [[0, 0, 0], ]
+        result = []
+        for i, item in enumerate(nums):
+            L2 = twoSum(nums[0 : i] + nums[i + 1 :], -item)
+            if L2:
+                result += L2
+        result = sorted(list(map(sorted, result)))
+        if not result:
+            return []
+        L = [result[0]]
+        for item in result:
+            if item != L[-1]:
+                L.append(item)
+        return L
+    
+    def threeSum_2(self, nums: list) -> list: # Unfinished
+        if len(nums) < 3:
+            return []
+        nums.sort()
+        result = []
+        for i, item in enumerate(nums):
+            if item > 0:
+                return result
+            if i > 0 and item == nums[i - 1]: # skip repeated items
+                continue
+
+
+    def test(self):
+        func_set = [lambda x: sorted(list(map(sorted, self.threeSum_1(x)))),
+                    lambda x: sorted(list(map(sorted, self.threeSum_2(x))))]
+        test_set = [(([-1, 0, 1, 2, -1, -4], ), [sorted(list(map(sorted, [[-1, 0, 1], [-1, -1, 2]]))), ]),
+                    (([-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6], ), [sorted(list(map(sorted, [[-4,-2,6],[-4,0,4],[-4,1,3],[-4,2,2],[-2,-2,4],[-2,0,2]]))), ])]
+        for f in func_set:
+            for data in test_set:
+                tester(f, *data).test()
 
 
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 15)]
+    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 16)]
     [S().test() for S in class_set]
