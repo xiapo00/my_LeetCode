@@ -11,7 +11,7 @@ class Solution_0011:
                 maybe.append(min(h_i, h_j) * (j + 1))
         return max(maybe)
     
-    def maxArea_2(self, height: list) -> int: # systematically wrong!!!
+    def maxArea_2(self, height: list) -> int: # systematically wrong!!! not in func_set of test()
         if len(height) == 1:
             return 0
         elif len(height) == 2:
@@ -103,7 +103,7 @@ class Solution_0011:
         return result
 
     def test(self):
-        func_set = [self.maxArea_1, self.maxArea_2, self.maxArea_3, self.maxArea_4, self.maxArea_5]
+        func_set = [self.maxArea_1, self.maxArea_3, self.maxArea_4, self.maxArea_5]
         test_set = [(([1, 8, 6, 2, 5, 4, 8, 3, 7], ), [49, ]),
                     (([1, 2, 1], ), [2, ]),
                     (([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], ), [25, ])]
@@ -168,6 +168,22 @@ class Solution_0013:
                 tester(f, *data).test()
 
 
+class Solution_0014:
+    def longestCommonPrefix_1(self, strs: list) -> str:
+        if not strs:
+            return ''
+        result = strs[0]
+        for item in strs:
+            while item[0 : len(result)] != result:
+                result = result[0 : len(result) - 1]
+        return result
+
+    def test(self):
+        func_set = [self.longestCommonPrefix_1, ]
+        test_set = [((["flower","flow","flight"], ), ["fl", ]),
+                    ((["dog","racecar","car"], ), ["", ])]
+
+
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 14)]
+    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 15)]
     [S().test() for S in class_set]
