@@ -6,10 +6,7 @@ class tester:
         self.f = func
         self.x = ques
         self.y = answ
-        try:
-            self.name = re.findall('bound method (.*?) of <', str(func))[0]
-        except IndexError:
-            self.name = str(func)
+        self.name = func.__name__
 
     def test(self):
         result = self.f(*self.x)

@@ -219,14 +219,37 @@ class Solution_0015:
         if len(nums) < 3:
             return []
         nums.sort()
+        N, P = 0, 0
+        for i in nums:
+            # Unfinished
         result = []
-        for i, item in enumerate(nums):
-            if item > 0:
-                return result
-            if i > 0 and item == nums[i - 1]: # skip repeated items
-                continue
-
-
+        for j in range(1, len(nums)-1):
+            i, k = j - 1, j + 1
+            while True:
+                if nums[i] + nums[j] + nums[k] == 0:
+                    result.append([nums[i], nums[j], nums[k]])
+                    if i == 0 and k == len(nums) - 1:
+                        break
+                    i = i - 1 if i > 0 else i
+                    k = k + 1 if k < len(nums) - 1 else k
+                elif nums[i] + nums[j] + nums[k] > 0:
+                    if i > 0:
+                        i -= 1
+                    else:
+                        break
+                else:
+                    if k < len(nums) - 1:
+                        k += 1
+                    else:
+                        break
+        if not result:
+            return []
+        L = [result[0]]
+        for item in result:
+            if item not in L:
+                L.append(item)
+        return L
+    
     def test(self):
         func_set = [lambda x: sorted(list(map(sorted, self.threeSum_1(x)))),
                     lambda x: sorted(list(map(sorted, self.threeSum_2(x))))]
@@ -237,6 +260,18 @@ class Solution_0015:
                 tester(f, *data).test()
 
 
+class Solution_0016:
+    def threeSumClosest_1(self, nums: list, target: int) -> int:
+        return 2
+
+    def test(self):
+        func_set = [self.threeSumClosest_1, ]
+        test_set = [(([-1, 2, 1, -4], 1), [2, ]), ]
+        for f in func_set:
+            for data in test_set:
+                tester(f, *data).test()
+
+
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 16)]
+    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 17)]
     [S().test() for S in class_set]
