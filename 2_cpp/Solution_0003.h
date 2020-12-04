@@ -17,19 +17,14 @@ bool hasRepeat(string s) {
     return 0;
 }
 
-int lengthOfLongestSubstring(string s) { // unfinished yet
+int lengthOfLongestSubstring(string s) {
     int i=0, len=s.size(), j=1;
-    int maybe=1;
     if(len < 2) return len;
-    while(i+j<=len) {
-        while(!hasRepeat(s.substr(i, j))) {
-            j++;
-        }
-        if (j > maybe) maybe = j;
-        i += j;
-        j = 1;
+    while(i+j<len) {
+        if(!hasRepeat(s.substr(i, j+1))) j++;
+        else i++;
     }
-    return maybe;
+    return j;
 }
 
 void test_0003() {

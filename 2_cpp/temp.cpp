@@ -3,6 +3,6 @@
 using namespace std;
 
 int main() {
-    string s="aba";
+    string s="ggububgvfk";
     cout << lengthOfLongestSubstring(s);
 }
