@@ -1,7 +1,3 @@
-#include <string>
-#include <vector>
-using namespace std;
-
 vector<string> vectorCombine(vector<string> v, string s) {
     vector<string> result = {};
     for (int i=0; i<v.size(); i++) {

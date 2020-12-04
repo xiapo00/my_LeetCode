@@ -1,4 +1,7 @@
 #include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
 #include "Solution_0001.h"
 #include "Solution_0002.h"
 #include "Solution_0003.h"

@@ -1,6 +1,3 @@
-#include <string>
-using namespace std;
-
 bool isIn(char c, string s) {
     for(int i=0; i<s.size(); i++) {
         if(s[i] == c) return 1;
