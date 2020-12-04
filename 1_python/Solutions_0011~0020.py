@@ -215,13 +215,10 @@ class Solution_0015:
                 L.append(item)
         return L
     
-    def threeSum_2(self, nums: list) -> list: # Unfinished
+    def threeSum_2(self, nums: list) -> list: # timeout
         if len(nums) < 3:
             return []
         nums.sort()
-        N, P = 0, 0
-        for i in nums:
-            # Unfinished
         result = []
         for j in range(1, len(nums)-1):
             i, k = j - 1, j + 1
@@ -261,8 +258,28 @@ class Solution_0015:
 
 
 class Solution_0016:
-    def threeSumClosest_1(self, nums: list, target: int) -> int:
-        return 2
+    def threeSumClosest_1(self, nums: list, target: int) -> int: # timeout
+        result = nums[0]+nums[1]+nums[2]
+        if len(nums) == 3:
+            return result
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                for k in range(j+1, len(nums)):
+                    if abs(nums[i]+nums[j]+nums[k]-target) < abs(result-target):
+                        result = nums[i]+nums[j]+nums[k]
+        return result
+    
+    def threeSumClosest_2(self, nums: list, target: int) -> int: # Unfinished
+        if len(nums) == 3:
+            return sum(nums)
+        nums.sort()
+        result = sum(nums[0:4])
+        for j in range(1, len(nums)-1):
+            i, k = j - 1, j + 1
+            while True:
+                if abs(nums[i] + nums[j] + nums[k] - target) < result:
+                    result = abs(nums[i] + nums[j] + nums[k] - target)
+        return result
 
     def test(self):
         func_set = [self.threeSumClosest_1, ]
@@ -272,6 +289,32 @@ class Solution_0016:
                 tester(f, *data).test()
 
 
+class Solution_0017:
+    def letterCombinations_1(self, digits: str) -> list:
+        if not digits:
+            return []
+        
+        def listCombine(l1: list, l2: str) -> list:
+            result = []
+            for item1 in l1:
+                for item2 in l2:
+                    result.append(item1 + item2)
+            return result
+
+        mapping = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
+        result = ['']
+        for digit in digits:
+            result = listCombine(result, mapping[digit])
+        return result
+
+    def test(self):
+        func_set = [self.letterCombinations_1, ]
+        test_set = [(("23", ), [["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"], ]), ]
+        for f in func_set:
+            for data in test_set:
+                tester(f, *data).test()
+
+
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 17)]
+    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 18)]
     [S().test() for S in class_set]
