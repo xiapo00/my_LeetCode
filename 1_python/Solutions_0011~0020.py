@@ -314,6 +314,11 @@ class Solution_0017:
             for data in test_set:
                 tester(f, *data).test()
 
+
+class Solution_0018: # Too difficult, remain to be solved.
+    def test(self):
+        pass
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
@@ -321,7 +326,7 @@ class ListNode:
         self.next = None
 
 
-class Solution_0018:
+class Solution_0019:
     def removeNthFromEnd_1(self, head: ListNode, n: int) -> ListNode:
         needle = head
         l = 0
@@ -387,6 +392,37 @@ class Solution_0018:
                 tester(f, *data).test()
 
 
+class Solution_0020:
+    def isValid_1(self, s: str) -> bool:
+        left = '([{'
+        right = ')]}'
+        L = []
+        if s[0] in right:
+            return False
+        for item in s:
+            if item in left:
+                L.append(left.index(item))
+            else:
+                try:
+                    if right.index(item) != L[-1]:
+                        return False
+                except IndexError:
+                    return False
+                L.pop(-1)
+        return not bool(L)
+
+    def test(self):
+        func_set = [self.isValid_1, ]
+        test_set = [(("()", ), [True, ]),
+                    (("()[]{}", ), [True, ]),
+                    (("(]", ), [False, ]),
+                    (("([)]", ), [False, ]),
+                    (("{[]}", ), [True, ])]
+        for f in func_set:
+            for data in test_set:
+                tester(f, *data).test()
+
+
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 19)]
+    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 21)]
     [S().test() for S in class_set]
