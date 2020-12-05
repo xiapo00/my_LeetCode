@@ -314,7 +314,79 @@ class Solution_0017:
             for data in test_set:
                 tester(f, *data).test()
 
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+class Solution_0018:
+    def removeNthFromEnd_1(self, head: ListNode, n: int) -> ListNode:
+        needle = head
+        l = 0
+        while needle:
+            needle = needle.next
+            l += 1
+        if l == n:
+            head = head.next
+            return head
+        needle = head
+        for i in range(l - n - 1):
+            needle = needle.next
+        needle.next = needle.next.next
+        return head
+
+    def removeNthFromEnd_2(self, head: ListNode, n: int) -> ListNode:
+        if not head.next:
+            return None
+        needle = head
+        L = []
+        for i in range(n+1):
+            L.append(needle)
+            try:
+                needle = needle.next
+            except AttributeError:
+                return head.next
+        while L[-1].next:
+            L = list(map(lambda x: x.next, L))
+        if n == 1:
+            L[-2].next = None
+            return head
+        L[0].next = L[2]
+        return head
+    
+    def test(self):
+        def int2ListNode(n):
+            a = ListNode(n % 10)
+            c = a
+            n //= 10
+            while n:
+                b = ListNode(n % 10)
+                n //= 10
+                a.next = b
+                a = b
+            return c
+
+        def ListNode2int(l):
+            n = 0
+            i = 1
+            while l:
+                n += l.val * i
+                i *= 10
+                l = l.next
+            return n
+        
+        func_set = [lambda x, y: ListNode2int(self.removeNthFromEnd_1(x, y)), lambda x, y: ListNode2int(self.removeNthFromEnd_2(x, y))]
+        for f in func_set:
+            test_set = [((int2ListNode(54321), 2), [5321, ]),
+                        ((int2ListNode(1), 1), [0, ]),
+                        ((int2ListNode(21), 1), [1, ]),
+                        ((int2ListNode(21), 2), [2, ])]
+            for data in test_set:
+                tester(f, *data).test()
+
 
 if __name__ == '__main__':
-    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 18)]
+    class_set = [eval('Solution_%04d' % (x)) for x in range(11, 19)]
     [S().test() for S in class_set]
