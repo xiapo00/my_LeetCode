@@ -54,20 +54,20 @@ void test_0002()
     l1 = num2List(342);
     l2 = num2List(465);
     r = addTwoNumbers(l1, l2);
-    std::cout << list2Num(r) << std::endl; // 807
+    cout << list2Num(r) << endl; // 807
 
     l1 = num2List(999);
     l2 = num2List(999);
     r = addTwoNumbers(l1, l2);
-    std::cout << list2Num(r) << std::endl; // 1998
+    cout << list2Num(r) << endl; // 1998
 
     l1 = num2List(9);
     l2 = num2List(9);
     r = addTwoNumbers(l1, l2);
-    std::cout << list2Num(r) << std::endl; // 18
+    cout << list2Num(r) << endl; // 18
 
     l1 = num2List(65);
     l2 = num2List(945);
     r = addTwoNumbers(l1, l2);
-    std::cout << list2Num(r) << std::endl; // 1010
+    cout << list2Num(r) << endl; // 1010
 }
